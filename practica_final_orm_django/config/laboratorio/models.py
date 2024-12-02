@@ -1,4 +1,5 @@
 import datetime
+from turtle import mode
 from django.db import models
 from django.core.validators  import MinValueValidator
 from django.utils.timezone import make_aware
@@ -7,6 +8,8 @@ from django.utils.timezone import make_aware
 
 class Laboratorio(models.Model):
     nombre = models.CharField(max_length=100)
+    ciudad = models.CharField(max_length=25, default='Santiago')
+    pais = models.CharField(max_length=25, default='Chile')
 
     def __str__(self):
         return self.nombre
@@ -14,6 +17,7 @@ class Laboratorio(models.Model):
 class DirectorGeneral(models.Model):
     nombre = models.CharField(max_length=100)
     laboratorio = models.OneToOneField(Laboratorio, on_delete=models.CASCADE)
+    especialidad = models.CharField(max_length=50, default='Sin especialidad')
     
     def __str__(self):
         return f'{self.nombre},{self.laboratorio}'
