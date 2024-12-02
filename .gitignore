@@ -7,3 +7,5 @@ entorno_orm_django/
 
 #configuracion sensible
 .env
+
+*.pdf

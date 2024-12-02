@@ -1,0 +1,34 @@
+----- CONSULTA 1 ----------
+╰─ python3 manage.py shell 
+Python 3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+
+>>> from laboratorio.models import Laboratorio, DirectorGeneral, Producto
+>>> laboratorios = Laboratorio.objects.all()
+>>> print(laboratorios)
+<QuerySet [<Laboratorio: Laboratorio1>, <Laboratorio: Laboratorio2>, <Laboratorio: Laboratorio3>]>
+
+>>> directores_generales = DirectorGeneral.objects.all()
+>>> print(directores_generales)
+<QuerySet [<DirectorGeneral: Director General: Director General 1, Laboratorio: Laboratorio1>, <DirectorGeneral: Director General: Director General 2, Laboratorio: Laboratorio2>, <DirectorGeneral: Director General: Director General 3, Laboratorio: Laboratorio3>]>
+>>> productos = Producto.objects.all()
+>>> print(productos)
+<QuerySet [<Producto: Producto: Producto 1, Laboratorio: Laboratorio1, Valor Venta: 2000.00>, <Producto: Producto: Producto 2, Laboratorio: Laboratorio2, Valor Venta: 3000.00>, <Producto: Producto: Producto 3, Laboratorio: Laboratorio3, Valor Venta: 4500.00>]>
+
+----CONSULTA 2-----
+>>> Producto.objects.get(nombre='Producto 1').laboratorio
+<Laboratorio: Laboratorio1>
+
+---CONSULTA 3 ----
+> Producto.objects.order_by('nombre').values('nombre', 'laboratorio__nombre')
+<QuerySet [{'nombre': 'Producto 1', 'laboratorio__nombre': 'Laboratorio1'}, {'nombre': 'Producto 2', 'laboratorio__nombre': 'Laboratorio2'}, {'nombre': 'Producto 3', 'laboratorio__nombre': 'Laboratorio3'}]>
+
+---CONSULTA 4 ----
+>>> for producto in Producto.objects.all():
+...     print(f"Producto: {producto.nombre}, Laboratorio: {producto.laboratorio.nombre}")
+... 
+Producto: Producto 1, Laboratorio: Laboratorio1
+Producto: Producto 2, Laboratorio: Laboratorio2
+Producto: Producto 3, Laboratorio: Laboratorio3
+>>> 
