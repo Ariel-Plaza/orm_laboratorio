@@ -1,0 +1,25 @@
+{% extends  'base.html' %}
+
+{% block title %}
+    {% if is_editing %} Editar Laboratorio 
+    {% else %} Crear Laboratorio 
+    {% endif %} 
+{% endblock %}
+
+{% block content %}
+
+<div class="text-align: center;">
+    <h1>{% if is_editing %} Editar Laboratorio {% else %} Crear Nuevo Laboratorio{% endif %}</h1>
+</div>
+<div>
+    <!-- envio de formulario -->
+    <form method="post">
+    <!-- seguridad para evitar ataques cruzados con token -->
+        {% csrf_token %}
+        <!-- metodo renderizar formulario dentro de un parrafo -->
+        {{form.as_p}}
+          <button type="submit">{% if is_editing %} Actualizar Laboratorio {% else %}Crear Laboratorio{% endif %}</button>
+    </form>
+</div>
+
+{% endblock %}
